@@ -2,6 +2,9 @@
   <x:Members>
     <x:Property Name="in_str_FullPathPdf" Type="InArgument(x:String)" />
     <x:Property Name="out_dt_TransactionData" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="in_str_NameExcel" Type="InArgument(x:String)" />
+    <x:Property Name="in_str_FileName" Type="InArgument(x:String)" />
+    <x:Property Name="io_str_FullPathExcel" Type="InOutArgument(x:String)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -51,6 +54,9 @@
       <x:String>System.Text.RegularExpressions</x:String>
       <x:String>UiPath.Excel</x:String>
       <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.DataTableUtilities</x:String>
+      <x:String>System.Numerics</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -119,22 +125,30 @@
       <AssemblyReference>System.Data.SqlClient</AssemblyReference>
       <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>System.CodeDom</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Read_Pdf" sap:VirtualizedContainerService.HintSize="1233,481.82399999999996" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Read_Pdf" sap:VirtualizedContainerService.HintSize="1216,2503" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="str_ExtractedPdf" />
       <Variable x:TypeArguments="scg:IEnumerable(str:Match)" Name="lst_Matches" />
+      <Variable x:TypeArguments="x:Int32" Name="int_ExcelCounter" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:BuildDataTable DataTable="[out_dt_TransactionData]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="416,92" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xD;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xD;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xD;&#xA;      &lt;xs:complexType&gt;&#xD;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xD;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xD;&#xA;            &lt;xs:complexType&gt;&#xD;&#xA;              &lt;xs:sequence&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Producto&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Zona_x0020_Envio&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;              &lt;/xs:sequence&gt;&#xD;&#xA;            &lt;/xs:complexType&gt;&#xD;&#xA;          &lt;/xs:element&gt;&#xD;&#xA;        &lt;/xs:choice&gt;&#xD;&#xA;      &lt;/xs:complexType&gt;&#xD;&#xA;    &lt;/xs:element&gt;&#xD;&#xA;  &lt;/xs:schema&gt;&#xD;&#xA;&lt;/NewDataSet&gt;" />
-    <ui:ReadPDFText PreserveFormatting="{x:Null}" DisplayName="Read PDF Text" FileName="[in_str_FullPathPdf]" sap:VirtualizedContainerService.HintSize="416,114" sap2010:WorkflowViewState.IdRef="ReadPDFText_1" Range="All" Text="[str_ExtractedPdf]" />
-    <ui:Matches FirstMatch="{x:Null}" BuilderPattern="“Nombre producto”:\s*“([^”]+)”\s*\|\s*“Zona\s*de\s*envio”:\s*“([^”]+)”" DisplayName="Find Matching Patterns" sap:VirtualizedContainerService.HintSize="416,92" sap2010:WorkflowViewState.IdRef="Matches_3" Input="[str_ExtractedPdf]" IsBuilderTabModified="True" Model="[{&quot;Index&quot;:0,&quot;OperationID&quot;:&quot;ADV&quot;,&quot;OperationName&quot;:&quot;Advanced&quot;,&quot;OperationValue&quot;:&quot;“Nombre producto”:\\s*“([^”]+)”\\s*\\|\\s*“Zona\\s*de\\s*envio”:\\s*“([^”]+)”&quot;,&quot;QuantifierFirstValue&quot;:&quot;1&quot;,&quot;QuantifierID&quot;:&quot;EXT&quot;,&quot;QuantifierName&quot;:&quot;Exactly&quot;,&quot;QuantifierSecondValue&quot;:null}]" Pattern="“Nombre producto”:\s*“([^”]+)”\s*\|\s*“Zona\s*de\s*envio”:\s*“([^”]+)”" RegexOption="IgnoreCase, Compiled" Result="[lst_Matches]" />
-    <ui:ForEach x:TypeArguments="str:Match" CurrentIndex="{x:Null}" DisplayName="For Each currentMatch" sap:VirtualizedContainerService.HintSize="416,48" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[lst_Matches]">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="538,175" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Read PDF...&quot;]" />
+    <ui:BuildDataTable DataTable="[out_dt_TransactionData]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="538,92" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Producto&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Zona_x0020_Envio&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
+    <ui:ReadPDFText PreserveFormatting="{x:Null}" DisplayName="Read PDF Text" FileName="[in_str_FullPathPdf]" sap:VirtualizedContainerService.HintSize="538,115" sap2010:WorkflowViewState.IdRef="ReadPDFText_1" Range="All" Text="[str_ExtractedPdf]" />
+    <ui:Matches FirstMatch="{x:Null}" BuilderPattern="“Nombre producto”:\s*“([^”]+)”\s*\|\s*“Zona\s*de\s*envio”:\s*“([^”]+)”" DisplayName="Find Matching Patterns" sap:VirtualizedContainerService.HintSize="538,92" sap2010:WorkflowViewState.IdRef="Matches_3" Input="[str_ExtractedPdf]" IsBuilderTabModified="True" Model="[{&quot;Index&quot;:0,&quot;OperationID&quot;:&quot;ADV&quot;,&quot;OperationName&quot;:&quot;Advanced&quot;,&quot;OperationValue&quot;:&quot;“Nombre producto”:\\s*“([^”]+)”\\s*\\|\\s*“Zona\\s*de\\s*envio”:\\s*“([^”]+)”&quot;,&quot;QuantifierFirstValue&quot;:&quot;1&quot;,&quot;QuantifierID&quot;:&quot;EXT&quot;,&quot;QuantifierName&quot;:&quot;Exactly&quot;,&quot;QuantifierSecondValue&quot;:null}]" Pattern="“Nombre producto”:\s*“([^”]+)”\s*\|\s*“Zona\s*de\s*envio”:\s*“([^”]+)”" RegexOption="IgnoreCase, Compiled" Result="[lst_Matches]" />
+    <ui:ForEach x:TypeArguments="str:Match" CurrentIndex="{x:Null}" DisplayName="For Each currentMatch" sap:VirtualizedContainerService.HintSize="538,85" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[lst_Matches]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="str:Match">
           <ActivityAction.Argument>
@@ -161,5 +175,78 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ForEach>
+    <ui:CopyFile ContinueOnError="{x:Null}" Destination="Data\Input" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="538,188" sap2010:WorkflowViewState.IdRef="CopyFile_1" Overwrite="True" Path="[io_str_FullPathExcel]" />
+    <ui:RenameFileX DisplayName="Rename File" FilePath="[&quot;Data\Input\&quot;+in_str_NameExcel+&quot;.xlsx&quot;]" sap:VirtualizedContainerService.HintSize="538,177" sap2010:WorkflowViewState.IdRef="RenameFileX_1" KeepExtension="True" NewName="[in_str_FileName+Today.ToString(&quot;yyyyMMdd&quot;)]" />
+    <Assign sap:VirtualizedContainerService.HintSize="538,115" sap2010:WorkflowViewState.IdRef="Assign_2">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[io_str_FullPathExcel]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">["Data\Input\"+in_str_FileName+Today.ToString("yyyyMMdd")+".xlsx"]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign sap:VirtualizedContainerService.HintSize="538,115" sap2010:WorkflowViewState.IdRef="Assign_6">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:Int32">[int_ExcelCounter]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:Int32">2</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:ExcelApplicationScope Password="{x:Null}" SensitivityLabel="{x:Null}" CreateNewFile="False" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="538,1160" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" InstanceCachePeriod="3000" SensitivityOperation="None" Visible="False" WorkbookPath="[io_str_FullPathExcel]">
+      <ui:ExcelApplicationScope.Body>
+        <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="504,978" sap2010:WorkflowViewState.IdRef="Sequence_8">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:String" Name="str_NombreHoja" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:ExcelGetWorkbookSheet DisplayName="Get Workbook Sheet" sap:VirtualizedContainerService.HintSize="470,113" sap2010:WorkflowViewState.IdRef="ExcelGetWorkbookSheet_1" Index="0" Sheet="[str_NombreHoja]" />
+            <ui:ExcelCopySheet DestinationFilePath="{x:Null}" DestinationSheetName="Precio_Entre" DisplayName="Copy Sheet" sap:VirtualizedContainerService.HintSize="470,113" sap2010:WorkflowViewState.IdRef="ExcelCopySheet_1" SheetName="[str_NombreHoja]" />
+            <ui:ExcelCopySheet DestinationFilePath="{x:Null}" DestinationSheetName="Fecha_Llegada" DisplayName="Copy Sheet" sap:VirtualizedContainerService.HintSize="470,113" sap2010:WorkflowViewState.IdRef="ExcelCopySheet_2" SheetName="[str_NombreHoja]" />
+            <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[out_dt_TransactionData]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="470,579" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+              <ui:ForEachRow.Body>
+                <ActivityAction x:TypeArguments="sd:DataRow">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="468,406" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:ExcelWriteCell Cell="[&quot;A&quot;+int_ExcelCounter.ToString]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="434,120" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_1" SheetName="[str_NombreHoja]" Text="[CurrentRow.Item(0).ToString]" />
+                    <ui:ExcelWriteCell Cell="[&quot;B&quot;+int_ExcelCounter.ToString]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="434,120" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_2" SheetName="[str_NombreHoja]" Text="[CurrentRow.Item(1).ToString]" />
+                    <Assign sap:VirtualizedContainerService.HintSize="434,106" sap2010:WorkflowViewState.IdRef="Assign_7">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:Int32">[int_ExcelCounter]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:Int32">[int_ExcelCounter+1]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                  </Sequence>
+                </ActivityAction>
+              </ui:ForEachRow.Body>
+            </ui:ForEachRow>
+          </Sequence>
+        </ActivityAction>
+      </ui:ExcelApplicationScope.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:ExcelApplicationScope>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="538,166" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;Read PDF Successful&quot;]" />
   </Sequence>
 </Activity>
