@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .container {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+        }
+        .header {
+            background-color: #0073e6;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        .details {
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin-top: 10px;
+        }
+        .footer {
+            font-size: 12px;
+            color: gray;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">⚠️ Error en el Proceso - UiPath</div>
+
+    <p><strong>Hola,</strong></p>
+    <p>Se ha detectado una <span class="error">excepción</span> en el proceso de automatización.</p>
+
+    <div class="details">
+        <p><strong>📌 Proceso:</strong> {process_name}</p>
+        <p><strong>⏳ Fecha/Hora:</strong> {date_time}</p>
+        <p><strong>🔍 Detalles del Error:</strong></p>
+        <p class="error">Mensaje : {exception_message}</p>
+          <p class="error">Fuente : {exception_source}</p>
+    </div>
+
+    <p>Por favor, revisa el problema lo antes posible.</p>
+
+    <div class="footer">
+        Este es un mensaje automático generado por UiPath. No respondas a este correo.
+    </div>
+</div>
+
+</body>
+</html>

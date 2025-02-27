@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ObjectRepositoryTargetData ContentHash="xgu7PIVyakGEsffW3YSNgQ" Reference="T9h1bcOxNk2VVk2X-BLd9g/pgrtRGim0EiiHlghutkLWg" xmlns="http://schemas.uipath.com/workflow/activities/uix" xmlns:p="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <ObjectRepositoryTargetData.Data>
+    <TargetAnchorable x:Key="TargetAnchorable" BrowserURL="https://www.amazon.com/GCQFZ-Convection-Accessories-14-6%C3%978-8-Replacement/dp/B0DPC7F5VN/ref=sr_1_1_sspa?crid=3CEGM3HKPBL3L&amp;dib=eyJ2IjoiMSJ9.FBlJghyFiWw_NBzGkZv6LplCQEh3Hbkq0WbzqEZGzeGhNyplkdBHQFtgETXeeskrwBXpJCqCqo94IK1uDVGfSdAJ3TYSsaJFXLHSNqqH3PbvC1SPz5GxkESORI-TasNO3KR9WD_1AJ9fjqFt5JlnUPPXM2NZqdf_S-wkvmAnlmyIK3CSnLjrraqoi6Nnk8dudWystj-m2RC61RQb9CtBnpANMyDcUOGL2cuTeJP_gTI.ajRgmudQAiIhOBHAYsM0NOPBhRGKxD0vaGydIXlL3VY&amp;dib_tag=se&amp;keywords=Black+%26+Decker+Horno+tostador&amp;qid=1740459147&amp;sprefix=black+%26+decker+horno+tos%2Caps%2C171&amp;sr=8-1-spons&amp;sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&amp;psc=1#customerReviews" DesignTimeRectangle="26, 295, 300, 296" DesignTimeScaleFactor="1" FullSelectorArgument="&lt;webctrl id='cm_cr_dp_d_rating_histogram' tag='DIV' /&gt;" Guid="f09954da-9985-428e-a854-0da3efb49c6d" ScopeSelectorArgument="&lt;html app='chrome.exe' htmlwindowname='https://m.media-amazon.com/images/I/11EIQ5IGqaL._RC%7C01ZTHTZObnL.css,51FIeTurRAL.css,31fFxDf00KL.css,11j2+ObrspL.css,01qDClimA1L.css,01pOTCa2wPL.css,413Vvv3GONL.css,11TIuySqr6L.css,01Rw4F+QU6L.css,11JJsNcqOIL.css,01J3raiFJrL.css,01IdKcBuAdL.css,014QJx7nWq*' title='Amazon.com: GCQFZ Convection Toaster Oven Accessories for BLACK DECKER 8 Slice Extra Wide Convection Toaster Oven, 14.6×8.8 IN Food Grade Replacement Tray Parts Grill Pan Grill Plate Rack Tray Crisper Plate: Home &amp;amp; Kitchen' /&gt;" SearchSteps="Selector" Version="V5" Visibility="Interactive">
+      <imageRef attrName="InformativeScreenshot" originalValue="f9e68586120920d75b3262cb8cb66809.png" xmlns="">0rOZut--r8kOb-e0xvkGw3w</imageRef>
+    </TargetAnchorable>
+    <x:String x:Key="ActivityType">ExtractData</x:String>
+    <p:InArgument x:TypeArguments="x:String" x:Key="ExtractDataSettings" xml:space="preserve">&lt;Table xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' Type='Structured' AddCvHeader='true' IsScrollEnabled='false'&gt;
+	&lt;Column xsi:type='DataColumn' ReferenceName='Column0' Name='New column 0'&gt;
+		&lt;IsValidName&gt;true&lt;/IsValidName&gt;
+		&lt;ValidationErrorMessage /&gt;
+		&lt;IsExtra&gt;false&lt;/IsExtra&gt;
+		&lt;CanExtractSimilar&gt;false&lt;/CanExtractSimilar&gt;
+		&lt;Format xsi:type='TextColumnFormat' /&gt;
+	&lt;/Column&gt;
+&lt;/Table&gt;</p:InArgument>
+    <x:Null x:Key="NextLinkTarget" />
+  </ObjectRepositoryTargetData.Data>
+</ObjectRepositoryTargetData>
